@@ -1,0 +1,38 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Список бронирований</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<div class="container">
+    <a th:href="@{/admin}" class="btn">Главная</a>
+    <a th:href="@{/admin/bookings/new}" class="btn">Новое бронирование</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Гость</th>
+            <th>Комната</th>
+            <th>Дата начала</th>
+            <th>Дата окончания</th>
+            <th>Действия</th>
+        </tr>
+        <tr th:each="b : ${bookings}">
+            <td th:text="${b.id}">1</td>
+            <td th:text="${b.guest.name}">Иван Иванов</td>
+            <td th:text="${b.room.number}">101</td>
+            <td th:text="${b.startDate}">2025-01-01</td>
+            <td th:text="${b.endDate}">2025-01-05</td>
+            <td>
+                <form th:action="@{/admin/bookings/delete}" method="post" style="display:inline">
+                    <input type="hidden" name="id" th:value="${b.id}"/>
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

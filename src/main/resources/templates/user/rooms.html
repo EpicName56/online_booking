@@ -1,0 +1,27 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Доступные комнаты</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<div class="container">
+    <h2>Список доступных комнат</h2>
+    <a th:href="@{/user}" class="btn">Назад</a>
+
+    <table>
+        <tr>
+            <th>Номер</th>
+            <th>Вместимость</th>
+            <th>Статус</th>
+        </tr>
+        <tr th:each="room : ${rooms}">
+            <td th:text="${room.number}">101</td>
+            <td th:text="${room.capacity}">2</td>
+            <td th:text="${room.status}">Свободна</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

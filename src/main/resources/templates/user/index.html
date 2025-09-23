@@ -1,0 +1,20 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Менеджер</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Интерфейс менеджера</h1>
+
+    <div style="display: flex; flex-direction: column; gap: 2vh; align-items: center;">
+        <a th:href="@{/user/rooms}" class="btn">Доступные комнаты</a>
+        <a th:href="@{/user/bookings}" class="btn">Мои брони</a>
+        <a th:href="@{/user/bookings/new}" class="btn">Забронировать комнату</a>
+        <a th:href="@{/}" class="btn">Выход</a>
+    </div>
+</div>
+</body>
+</html>

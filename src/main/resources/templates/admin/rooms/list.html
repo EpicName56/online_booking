@@ -1,0 +1,37 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Список комнат</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<div class="container">
+    <a th:href="@{/admin}" class="btn">Главная</a>
+    <a th:href="@{/admin/rooms/new}" class="btn">Добавить комнату</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Номер</th>
+            <th>Вместимость</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+        <tr th:each="r : ${rooms}">
+            <td th:text="${r.id}">1</td>
+            <td th:text="${r.number}">101</td>
+            <td th:text="${r.capacity}">2</td>
+            <td th:text="${r.status}">Свободна</td>
+            <td>
+                <a th:href="@{/admin/rooms/edit/{id}(id=${r.id})}" class="btn">Редактировать</a>
+                <form th:action="@{/admin/rooms/delete}" method="post" style="display:inline">
+                    <input type="hidden" name="id" th:value="${r.id}"/>
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

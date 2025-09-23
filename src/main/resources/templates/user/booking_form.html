@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Форма бронирования</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h2 th:text="${booking != null and booking.id != null} ? 'Редактировать бронь' : 'Создать бронь'"></h2>
+<a th:href="@{/user}" class="btn">Назад</a>
+
+<div class="container">
+    <!-- вывод ошибки -->
+    <div th:if="${error}" class="error">
+        <p th:text="${error}"></p>
+    </div>
+
+    <form th:action="${booking != null and booking.id != null} ? @{/user/bookings/update} : @{/user/bookings/save}"
+          method="post">
+        <input type="hidden" name="id" th:value="${booking != null} ? ${booking.id} : ''"/>
+
+        <label>Гость:
+            <select name="guestId">
+                <option th:each="g : ${guests}"
+                        th:value="${g.id}"
+                        th:text="${g.name}"
+                        th:selected="${booking != null and booking.guest != null and g.id == booking.guest.id}">
+                </option>
+            </select>
+        </label>
+
+        <label>Комната:
+            <select name="roomId">
+                <option th:each="r : ${rooms}"
+                        th:value="${r.id}"
+                        th:text="${r.number}"
+                        th:selected="${booking != null and booking.room != null and r.id == booking.room.id}">
+                </option>
+            </select>
+        </label>
+
+        <label>Дата заезда:
+            <input type="date" name="startDate"
+                   th:value="${booking != null and booking.startDate != null} ? ${booking.startDate} : ''"/>
+        </label>
+
+        <label>Дата выезда:
+            <input type="date" name="endDate"
+                   th:value="${booking != null and booking.endDate != null} ? ${booking.endDate} : ''"/>
+        </label>
+
+        <button type="submit"
+                th:text="${booking != null and booking.id != null} ? 'Обновить' : 'Забронировать'"></button>
+    </form>
+</div>
+</body>
+</html>

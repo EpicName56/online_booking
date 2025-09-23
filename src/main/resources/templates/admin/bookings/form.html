@@ -1,0 +1,43 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Форма бронирования</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h2>Новое бронирование</h2>
+<a th:href="@{/admin/bookings}" class="btn">Назад к списку</a>
+
+<div class="container">
+    <!-- вывод ошибки -->
+    <div th:if="${error}" class="error">
+        <p th:text="${error}"></p>
+    </div>
+
+    <form th:action="@{/admin/bookings/save}" method="post">
+        <label>Гость:
+            <select name="guestId">
+                <option th:each="g : ${guests}" th:value="${g.id}" th:text="${g.name}">Гость</option>
+            </select>
+        </label>
+
+        <label>Комната:
+            <select name="roomId">
+                <option th:each="r : ${rooms}" th:value="${r.id}" th:text="${r.number}">Комната</option>
+            </select>
+        </label>
+
+        <label>Дата заезда:
+            <input type="date" name="startDate"/>
+        </label>
+
+        <label>Дата выезда:
+            <input type="date" name="endDate"/>
+        </label>
+
+        <button type="submit">Забронировать</button>
+    </form>
+</div>
+</body>
+</html>

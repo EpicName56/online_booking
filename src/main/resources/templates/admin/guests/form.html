@@ -1,0 +1,28 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Форма гостя</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h2 th:text="${guest.id == null ? 'Новый гость' : 'Редактировать гостя'}"></h2>
+<a th:href="@{/admin/guests}" class="btn">Назад к списку</a>
+
+<div class="container">
+    <form th:action="@{/admin/guests/save}" method="post">
+        <input type="hidden" name="id" th:value="${guest.id}"/>
+
+        <label>Имя:
+            <input type="text" name="name" th:value="${guest.name}"/>
+        </label>
+
+        <label>Email:
+            <input type="email" name="email" th:value="${guest.email}"/>
+        </label>
+
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>

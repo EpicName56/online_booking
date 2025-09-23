@@ -1,0 +1,35 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Список гостей</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<div class="container">
+    <a th:href="@{/admin}" class="btn">Главная</a>
+    <a th:href="@{/admin/guests/new}" class="btn">Добавить гостя</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Действия</th>
+        </tr>
+        <tr th:each="g : ${guests}">
+            <td th:text="${g.id}">1</td>
+            <td th:text="${g.name}">Иван Иванов</td>
+            <td th:text="${g.email}">ivan@example.com</td>
+            <td>
+                <a th:href="@{/admin/guests/edit/{id}(id=${g.id})}" class="btn">Редактировать</a>
+                <form th:action="@{/admin/guests/delete}" method="post" style="display:inline">
+                    <input type="hidden" name="id" th:value="${g.id}"/>
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

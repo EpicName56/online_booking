@@ -1,0 +1,28 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Форма комнаты</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+<h2 th:text="${room.id == null ? 'Новая комната' : 'Редактировать комнату'}"></h2>
+<a th:href="@{/admin/rooms}" class="btn">Назад к списку</a>
+
+<div class="container">
+    <form th:action="@{/admin/rooms/save}" method="post">
+        <input type="hidden" name="id" th:value="${room.id}"/>
+
+        <label>Номер:
+            <input type="text" name="number" th:value="${room.number}"/>
+        </label>
+
+        <label>Вместимость:
+            <input type="number" name="capacity" th:value="${room.capacity}"/>
+        </label>
+
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>
